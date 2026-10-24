@@ -1,0 +1,276 @@
+/* RESET BÁSICO E VARIÁVEIS DE DESIGN */
+:root {
+  --bg-color: #0f172a;
+  --card-bg: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --primary-accent: #10b981;
+  --primary-hover: #059669;
+  --warning-bg: #451a03;
+  --warning-border: #f59e0b;
+  --error-bg: #450a0a;
+  --error-border: #ef4444;
+  --border-radius: 16px;
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-family);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* CABEÇALHO */
+.header {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  background-color: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(8px);
+  border-b: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.logo-area h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* LAYOUT PRINCIPAL RESPONSIVO */
+.main-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+}
+
+/* SEÇÃO DO QR CODE */
+.qr-card {
+  background-color: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.qr-card h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.qr-instruction {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto 1.2rem auto;
+}
+
+.qr-code-wrapper {
+  display: inline-flex;
+  padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.qrcode-box canvas, .qrcode-box img {
+  display: block;
+}
+
+/* AVISO DE AMBIENTE LOCAL */
+.qr-notice {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.qr-notice.warning {
+  background-color: var(--warning-bg);
+  border: 1px solid var(--warning-border);
+  color: #fef3c7;
+}
+
+.qr-notice code {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+/* SEÇÃO DO VISUALIZADOR 3D */
+.viewer-card {
+  background-color: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  height: 500px;
+  position: relative;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+model-viewer {
+  width: 100%;
+  height: 100%;
+  --poster-color: transparent;
+}
+
+/* BOTÃO DE AR PERSONALIZADO */
+.btn-ar {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--primary-accent);
+  color: #022c22;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+  transition: all 0.2s ease-in-out;
+  z-index: 10;
+}
+
+.btn-ar:hover {
+  background-color: var(--primary-hover);
+  transform: translateX(-50%) scale(1.03);
+}
+
+.btn-ar:active {
+  transform: translateX(-50%) scale(0.98);
+}
+
+/* BARRA DE PROGRESSO DO MODELO */
+.progress-bar-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: var(--primary-accent);
+  transition: width 0.2s ease;
+}
+
+/* MENSAGEM DE ERRO GLB */
+.error-banner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--error-bg);
+  border: 1px solid var(--error-border);
+  color: #fecdd3;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 90%;
+  width: 420px;
+  font-size: 0.9rem;
+  z-index: 20;
+}
+
+/* INSTRUÇÕES AO USUÁRIO */
+.instructions-card {
+  background-color: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+}
+
+.instructions-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.steps-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.steps-list li {
+  background-color: rgba(15, 23, 42, 0.6);
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.steps-list li strong {
+  color: var(--text-main);
+  display: inline;
+}
+
+/* RODAPÉ */
+.footer {
+  text-align: center;
+  padding: 1.2rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: auto;
+  border-t: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* UTILITÁRIO */
+.hidden {
+  display: none !important;
+}
+
+/* RESPONSIVIDADE PARA TELAS PEQUENAS (MOBILE) */
+@media (max-width: 640px) {
+  .viewer-card {
+    height: 400px;
+  }
+  
+  .qr-section {
+    order: 2; /* No celular, o QR Code passa para baixo pois o usuário já está no celular */
+  }
+
+  .qr-card h2 {
+    font-size: 1.1rem;
+  }
+
+  .btn-ar {
+    width: 90%;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
+}

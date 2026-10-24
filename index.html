@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visualizador 3D & Realidade Aumentada</title>
+  
+  <!-- Estilos da aplicação -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Biblioteca oficial <model-viewer> da Google para 3D e AR -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+
+  <!-- Biblioteca para Geração Automática de QR Code -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+  <header class="header">
+    <div class="logo-area">
+      <span class="icon">✨</span>
+      <h1>Visualizador 3D de Produto</h1>
+    </div>
+  </header>
+
+  <main class="main-container">
+
+    <!-- SEÇÃO SUPERIOR: QR CODE E ORIENTAÇÕES -->
+    <section class="qr-section" id="qr-section">
+      <div class="qr-card">
+        <h2>Visualizar no Celular em Realidade Aumentada</h2>
+        <p class="qr-instruction">
+          Aponte a câmera do seu celular para o QR Code abaixo para abrir esta experiência e posicionar o produto no seu ambiente real.
+        </p>
+
+        <div class="qr-code-wrapper">
+          <div id="qrcode" class="qrcode-box"></div>
+        </div>
+
+        <!-- Aviso para ambiente de teste local (localhost ou arquivo salvo) -->
+        <div id="qr-notice" class="qr-notice hidden"></div>
+      </div>
+    </section>
+
+    <!-- SEÇÃO CENTRAL: VISUALIZADOR 3D INTERATIVO -->
+    <section class="viewer-section">
+      <div class="viewer-card">
+        
+        <model-viewer
+          id="product-viewer"
+          src="PRODUTO.glb"
+          alt="Modelo 3D interativo do produto"
+          ar
+          ar-modes="scene-viewer quick-look webxr"
+          camera-controls
+          auto-rotate
+          shadow-intensity="1"
+          shadow-softness="0.8"
+          exposure="1"
+          touch-action="pan-y">
+
+          <!-- Botão sob medida para ativação de Realidade Aumentada -->
+          <button slot="ar-button" class="btn-ar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+              <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+            Visualizar no meu ambiente
+          </button>
+
+          <!-- Indicador de Carregamento Personalizado -->
+          <div slot="progress-bar" class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
+          </div>
+
+          <!-- Mensagem de Erro caso PRODUTO.glb não seja localizado -->
+          <div id="error-message" class="error-banner hidden">
+            ⚠️ <strong>Arquivo do produto não encontrado:</strong> Certifique-se de ter colocado o arquivo <code>PRODUTO.glb</code> exatamente na pasta principal do projeto.
+          </div>
+
+        </model-viewer>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO INFERIOR: INSTRUÇÕES PARA O USUÁRIO FINAL -->
+    <section class="instructions-section">
+      <div class="instructions-card">
+        <h3>Como usar a Realidade Aumentada</h3>
+        <ol class="steps-list">
+          <li><strong>1. Escaneie:</strong> Aponta a câmera do celular para o QR Code no topo da página.</li>
+          <li><strong>2. Aguarde:</strong> Espere o modelo 3D carregar na tela do seu celular.</li>
+          <li><strong>3. Toque no Botão:</strong> Pressione o botão verde <em>“Visualizar no meu ambiente”</em>.</li>
+          <li><strong>4. Posicione:</strong> Mova o celular apontando para o chão ou mesa para colocar o produto na sua sala.</li>
+        </ol>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>Experiência 3D & RA desenvolvida com Google &lt;model-viewer&gt;</p>
+  </footer>
+
+  <!-- Script da Aplicação -->
+  <script src="script.js"></script>
+</body>
+</html>
